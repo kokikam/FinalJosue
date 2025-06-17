@@ -102,7 +102,7 @@ def main():
     keras.config.enable_unsafe_deserialization()
     model = load_model("C:/Users/Josue/OneDrive/MNA/Navegacion Autonoma/FinalJosue/final.keras")
 
-    time_sleep = 1000    
+    time_sleep = 300    
     prediction = 0.0    
     while robot.step() != -1:
         # Get image from camera
@@ -121,7 +121,7 @@ def main():
             prediction = float(prediction)
             print(f"prediction -> {prediction}")
             #set_steering_angle(prediction)
-            time_sleep = 1000
+            time_sleep = 300
         else:
             time_sleep -= timestep
 
