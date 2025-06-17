@@ -101,29 +101,21 @@ def main():
 
     keras.config.enable_unsafe_deserialization()
     model = load_model("C:/Users/Josue/OneDrive/MNA/Navegacion Autonoma/FinalJosue/final.keras")
-
-    time_sleep = 300    
+ 
     prediction = 0.0    
     while robot.step() != -1:
         # Get image from camera
         image = get_image(camera)
-        image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-        # Process and display image 
-
+        image = cv2.GaussianBlur(image, (3, 3), 0)
+        image = cv2.cvtColor(image, cv2.COLOR_RGB2YUV)
+        image = image[80:, :, :]
+        image = cv2.resize(image, (200, 66))  
         display_image(display_img, image)
-        
-        if time_sleep <= 0:
-            image = image[80:, :, :]
-            image = cv2.resize(image, (200, 66))  
-            #mask_image = mask_image / 255.0 - 0.5
-            input_tensor = np.expand_dims(image, axis=0)
-            prediction = model.predict(input_tensor)[0][0]
-            prediction = float(prediction)
-            print(f"prediction -> {prediction}")
-            #set_steering_angle(prediction)
-            time_sleep = 300
-        else:
-            time_sleep -= timestep
+        #mask_image = mask_image / 255.0 - 0.5
+        input_tensor = np.expand_dims(image, axis=0)
+        prediction = model.predict(input_tensor)[0][0]
+        prediction = float(prediction)
+        print(f"prediction -> {prediction}")
 
         # Read keyboard
         key=keyboard.getKey()

@@ -98,7 +98,7 @@ def main():
     keyboard=Keyboard()
     keyboard.enable(timestep)
 
-    time_sleep = 1000
+    time_sleep = 300
 
     csv_file = 'C:/Users/Josue/OneDrive/MNA/Navegacion Autonoma/FinalJosue/data.csv'
     if not os.path.exists(csv_file):
@@ -127,7 +127,7 @@ def main():
             
 
 
-            time_sleep = 1000
+            time_sleep = 300
         else:
             time_sleep -= timestep
         # Read keyboard
