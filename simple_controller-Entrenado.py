@@ -100,35 +100,27 @@ def main():
     keyboard.enable(timestep)
 
     keras.config.enable_unsafe_deserialization()
-    model = load_model("C:/Users/Josue/OneDrive/MNA/Navegacion Autonoma/Final/final.keras")
+    model = load_model("C:/Users/Josue/OneDrive/MNA/Navegacion Autonoma/FinalJosue/final.keras")
 
-    time_sleep = 1000        
+    time_sleep = 1000    
+    prediction = 0.0    
     while robot.step() != -1:
         # Get image from camera
         image = get_image(camera)
         image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         # Process and display image 
-        image = cv2.resize(image, [200, 66])
-        
-        vertices_area_interes = np.array(
-            [[(0, 66), (0, 25), (200, 25), (200, 66)]],
-            dtype=np.int32
-        )
-        #vertices_area_interes = vertices_area_interes.reshape((-1, 1, 2))
-        roi = np.zeros((66,200), dtype=np.uint8)
-        cv2.fillPoly(roi, vertices_area_interes, color=255)
-        mask_image = cv2.bitwise_and(image, image, mask=roi )
 
-        display_image(display_img, mask_image)
+        display_image(display_img, image)
         
         if time_sleep <= 0:
-            mask_image = mask_image[50:, :, :]
-            mask_image = cv2.resize(mask_image, (200, 66))  
-            mask_image = mask_image / 255.0 - 0.5
-            input_tensor = np.expand_dims(mask_image, axis=0)
+            image = image[80:, :, :]
+            image = cv2.resize(image, (200, 66))  
+            #mask_image = mask_image / 255.0 - 0.5
+            input_tensor = np.expand_dims(image, axis=0)
             prediction = model.predict(input_tensor)[0][0]
+            prediction = float(prediction)
             print(f"prediction -> {prediction}")
-            set_steering_angle(prediction)
+            #set_steering_angle(prediction)
             time_sleep = 1000
         else:
             time_sleep -= timestep
@@ -156,7 +148,7 @@ def main():
             mask_image = cv2.cvtColor(mask_image, cv2.COLOR_RGB2BGR)
             cv2.imwrite("C:/Users/Josue/OneDrive/MNA/Navegacion Autonoma/Final/data/" + file_name, mask_image)
         #update angle and speed
-        driver.setSteeringAngle(angle)
+        driver.setSteeringAngle(prediction)
         driver.setCruisingSpeed(speed)
 
 

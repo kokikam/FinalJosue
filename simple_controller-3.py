@@ -100,7 +100,7 @@ def main():
 
     time_sleep = 1000
 
-    csv_file = 'C:/Users/Josue/OneDrive/MNA/Navegacion Autonoma/Final/data2.csv'
+    csv_file = 'C:/Users/Josue/OneDrive/MNA/Navegacion Autonoma/FinalJosue/data.csv'
     if not os.path.exists(csv_file):
         with open(csv_file, mode='w', newline='') as file:
             writer = csv.writer(file)
@@ -119,7 +119,7 @@ def main():
             print("Image taken")
             #mask_image.saveImage("C:/Users/Josue/OneDrive/MNA/Navegacion Autonoma/Final/data/" + file_name, 1)
             image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
-            cv2.imwrite("C:/Users/Josue/OneDrive/MNA/Navegacion Autonoma/Final/data2/" + file_name, image)
+            cv2.imwrite("C:/Users/Josue/OneDrive/MNA/Navegacion Autonoma/FinalJosue/data/" + file_name, image)
             
             with open(csv_file, mode='a', newline='') as file:
                 writer = csv.writer(file)
@@ -151,7 +151,7 @@ def main():
             print("Image taken")
             #mask_image.saveImage("C:/Users/Josue/OneDrive/MNA/Navegacion Autonoma/Final/data/" + file_name, 1)
             mask_image = cv2.cvtColor(mask_image, cv2.COLOR_RGB2BGR)
-            cv2.imwrite("C:/Users/Josue/OneDrive/MNA/Navegacion Autonoma/Final/data/" + file_name, mask_image)
+            cv2.imwrite("C:/Users/Josue/OneDrive/MNA/Navegacion Autonoma/FinalJosue/data/" + file_name, mask_image)
         #update angle and speed
         driver.setSteeringAngle(angle)
         driver.setCruisingSpeed(speed)
