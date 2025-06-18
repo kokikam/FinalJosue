@@ -106,10 +106,10 @@ def main():
     while robot.step() != -1:
         # Get image from camera
         image = get_image(camera)
-        image = cv2.GaussianBlur(image, (3, 3), 0)
+        image = image[90:,:,:]
         image = cv2.cvtColor(image, cv2.COLOR_RGB2YUV)
-        image = image[100:, :, :]
-        image = cv2.resize(image, (200, 66))  
+        image = cv2.GaussianBlur(image, (3, 3), 0)
+        image = cv2.resize(image, (200, 66))
         display_image(display_img, image)
         #image = image / 255.0 - 0.5
         input_tensor = np.expand_dims(image, axis=0)
