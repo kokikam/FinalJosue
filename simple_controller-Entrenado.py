@@ -108,7 +108,7 @@ def main():
         image = get_image(camera)
         image = cv2.GaussianBlur(image, (3, 3), 0)
         image = cv2.cvtColor(image, cv2.COLOR_RGB2YUV)
-        image = image[80:, :, :]
+        image = image[100:, :, :]
         image = cv2.resize(image, (200, 66))  
         display_image(display_img, image)
         #mask_image = mask_image / 255.0 - 0.5
