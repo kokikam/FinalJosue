@@ -111,7 +111,7 @@ def main():
         image = image[100:, :, :]
         image = cv2.resize(image, (200, 66))  
         display_image(display_img, image)
-        #mask_image = mask_image / 255.0 - 0.5
+        image = image / 255.0 - 0.5
         input_tensor = np.expand_dims(image, axis=0)
         prediction = model.predict(input_tensor)[0][0]
         prediction = float(prediction)
