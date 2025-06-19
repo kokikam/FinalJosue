@@ -106,14 +106,14 @@ def main():
     while robot.step() != -1:
         # Get image from camera
         image = get_image(camera)
-        image = image[95:,:,:]
-        image = cv2.cvtColor(image, cv2.COLOR_RGB2YUV)
-        image = cv2.GaussianBlur(image, (3, 3), 0)
+        image = image[95:135,:,:]
+        image = cv2.cvtColor(image, cv2.COLOR_BGRA2RGB)
+        #image = cv2.GaussianBlur(image, (3, 3), 0)
         image = cv2.resize(image, (200, 66))
         display_image(display_img, image)
-        #image = image / 255
+        image = image / 255
         input_tensor = np.expand_dims(image, axis=0)
-        prediction = model.predict(input_tensor)[0][0]
+        prediction = model.predict(input_tensor, verbose=0)[0]
         prediction = float(prediction)
         print(f"prediction -> {prediction}")
 
