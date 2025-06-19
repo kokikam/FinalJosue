@@ -106,8 +106,8 @@ def main():
     while robot.step() != -1:
         # Get image from camera
         image = get_image(camera)
-        image = image[95:135,:,:]
-        image = cv2.cvtColor(image, cv2.COLOR_BGRA2RGB)
+        image = image[110:135,:,:]
+        image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         #image = cv2.GaussianBlur(image, (3, 3), 0)
         image = cv2.resize(image, (200, 66))
         display_image(display_img, image)
