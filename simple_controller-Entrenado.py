@@ -111,9 +111,9 @@ def main():
         image = cv2.GaussianBlur(image, (3, 3), 0)
         image = cv2.resize(image, (200, 66))
         display_image(display_img, image)
-        image = image / 127.5 - 1.0
-        image = np.array([image])
-        prediction = model.predict(image)
+        #image = image / 255
+        input_tensor = np.expand_dims(image, axis=0)
+        prediction = model.predict(input_tensor)[0][0]
         prediction = float(prediction)
         print(f"prediction -> {prediction}")
 
