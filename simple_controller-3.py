@@ -115,7 +115,7 @@ def main():
 
         if time_sleep <= 0:
             current_datetime = str(datetime.now().strftime("%Y-%m-%d %H-%M-%S"))
-            file_name = current_datetime + ".png"
+            file_name = current_datetime + "_jpg.png"
             print("Image taken")
             #mask_image.saveImage("C:/Users/Josue/OneDrive/MNA/Navegacion Autonoma/Final/data/" + file_name, 1)
             image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
