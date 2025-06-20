@@ -107,7 +107,7 @@ def main():
         # Get image from camera
         image = get_image(camera)
         #image = image[110:150,130:210:]
-        image = image[110:150,130:210:]
+        image = image[90:150,:,:]
         image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         image = cv2.GaussianBlur(image, (3, 3), 0)
         image = cv2.resize(image, (200, 66))
