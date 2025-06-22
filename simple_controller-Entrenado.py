@@ -106,11 +106,15 @@ def main():
     while robot.step() != -1:
         # Get image from camera
         image = get_image(camera)
-        image = image[85:140,100:200:]
+        
+        #image = image[85:140,100:200:]
         #image = image[110:150,130:210:]
         #image = image[90:150,:,:]
-        image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        image = cv2.cvtColor(image, cv2.COLOR_BGR2YUV)
         #image = cv2.GaussianBlur(image, (3, 3), 0)
+        image = cv2.resize(image, (200, 66))
+        #image = image[34:60,20:140:] #modelo 4
+        image = image[20:60,::]  # modelo 5
         image = cv2.resize(image, (200, 66))
         display_image(display_img, image)
         image = image / 255
