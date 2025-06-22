@@ -40,7 +40,7 @@ def display_image(display, image):
 manual_steering = 0
 steering_angle = 0
 angle = 0.0
-speed = 15
+speed = 30
 
 # set target speed
 def set_speed(kmh):
@@ -100,16 +100,17 @@ def main():
     keyboard.enable(timestep)
 
     keras.config.enable_unsafe_deserialization()
-    model = load_model("C:/Users/Josue/OneDrive/MNA/Navegacion Autonoma/FinalJosue/final.keras")
+    model = load_model("C:/Users/Josue/OneDrive/MNA/Navegacion Autonoma/FinalJosue/final_2.keras")
  
     prediction = 0.0    
     while robot.step() != -1:
         # Get image from camera
         image = get_image(camera)
+        image = image[85:140,100:200:]
         #image = image[110:150,130:210:]
-        image = image[90:150,:,:]
+        #image = image[90:150,:,:]
         image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-        image = cv2.GaussianBlur(image, (3, 3), 0)
+        #image = cv2.GaussianBlur(image, (3, 3), 0)
         image = cv2.resize(image, (200, 66))
         display_image(display_img, image)
         image = image / 255
